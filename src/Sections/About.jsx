@@ -1,4 +1,4 @@
-import about from "../../assets/about.png";
+import about from "../assets/about.png";
 const About = () => {
   return (
     <div className="mt-20 max-w-7xl mx-auto">

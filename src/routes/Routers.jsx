@@ -3,8 +3,10 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MainLayout from "../pages/MainLayout";
 import Register from "../pages/Register";
-import WhoCanUse from "../pages/Sections/WhoCanUse";
-import About from "../pages/Sections/About";
+import WhoCanUse from "../Sections/WhoCanUse";
+import About from "../Sections/About";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 
 const routers = createBrowserRouter([
   {
@@ -30,6 +32,16 @@ const routers = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        path: "/dashboard/home",
+        element: <DashboardHome />,
       },
     ],
   },
