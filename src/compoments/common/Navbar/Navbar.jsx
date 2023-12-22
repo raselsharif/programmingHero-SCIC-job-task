@@ -1,6 +1,6 @@
 import { Avatar, Dropdown, Navbar as Nav } from "flowbite-react";
 import logo from "../../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -34,9 +34,9 @@ const Navbar = () => {
               name@flowbite.com
             </span>
           </Dropdown.Header>
-          <Dropdown.Item>Dashboard</Dropdown.Item>
-          <Dropdown.Item>Settings</Dropdown.Item>
-          <Dropdown.Item>Earnings</Dropdown.Item>
+          <Link to={"/dashboard/home"}>
+            <Dropdown.Item>Dashboard</Dropdown.Item>
+          </Link>
           <Dropdown.Divider />
           <Dropdown.Item>Sign out</Dropdown.Item>
         </Dropdown>

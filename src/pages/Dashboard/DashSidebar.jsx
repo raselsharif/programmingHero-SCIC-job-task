@@ -24,7 +24,7 @@ const DashSidebar = () => {
                 Dashboard
               </Sidebar.Item>
             </NavLink>
-            <NavLink to={"/dashboard/home"}>
+            <NavLink to={"/dashboard/create-task"}>
               <Sidebar.Item href="#" icon={HiChartPie}>
                 Create New Task
               </Sidebar.Item>

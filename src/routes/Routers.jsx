@@ -7,6 +7,7 @@ import WhoCanUse from "../Sections/WhoCanUse";
 import About from "../Sections/About";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
+import CreateTask from "../pages/Dashboard/CreatTask/CreateTask";
 
 const routers = createBrowserRouter([
   {
@@ -42,6 +43,11 @@ const routers = createBrowserRouter([
       {
         path: "/dashboard/home",
         element: <DashboardHome />,
+      },
+
+      {
+        path: "/dashboard/create-task",
+        element: <CreateTask />,
       },
     ],
   },
