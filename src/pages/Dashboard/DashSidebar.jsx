@@ -5,17 +5,28 @@ import { BsListTask } from "react-icons/bs";
 import { CiPower } from "react-icons/ci";
 import { FaHome } from "react-icons/fa";
 import demouser from "../../assets/demouser.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 const DashSidebar = () => {
+  const navigate = useNavigate();
+  const { logOut, user } = useAuth();
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged Out successfully");
+      navigate("/");
+    });
+  };
   return (
     <div className="h-screen shadow-md shadow-black">
       <Sidebar className="w-full">
         <div className="mb-10">
           <img
-            src={demouser}
+            src={user ? user?.photoURL : demouser}
             alt="user image"
             className="h-16 w-16 rounded-full border border-cyan-500"
           />
+          <h3 className="mt-2">{user?.displayName}</h3>
         </div>
         <div className="space-y-2">
           <NavLink
@@ -61,7 +72,10 @@ const DashSidebar = () => {
             <FaHome className="text-2xl " />
             Main Home
           </Link>
-          <Button color="red">Logout</Button>
+          <Button onClick={handleLogOut} color="red">
+            <CiPower className="mr-2" />
+            Logout
+          </Button>
         </Sidebar.ItemGroup>
       </Sidebar>
     </div>

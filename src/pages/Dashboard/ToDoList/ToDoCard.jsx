@@ -1,9 +1,18 @@
+import axios from "axios";
+import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
 const ToDoCard = ({ task }) => {
   //   console.log(task);
   const handleDelete = (id) => {
     console.log(id);
+    axios.delete(`http://localhost:5000/task/delete/${id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.deletedCount > 0) {
+        toast.success("Deleted successfully");
+        location.reload();
+      }
+    });
   };
   return (
     <div className="border border-cyan-600 p-3 flex justify-between">
