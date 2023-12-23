@@ -16,7 +16,7 @@ const TodoList = () => {
       });
   }, [user.email]);
   return (
-    <div className="mt-20 p-4 grid grid-cols-2 gap-3">
+    <div className="mt-20 p-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
       <div className="border p-1 border-cyan-600">
         <h3 className="text-center mb-4 text-cyan-600 text-2xl">To-do</h3>
         <div className="flex flex-col gap-3">
