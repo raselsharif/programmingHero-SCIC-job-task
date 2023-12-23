@@ -2,8 +2,19 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useDrag } from "react-dnd";
 
+const ItemTypes = {
+  CARD: "card",
+};
 const ToDoCard = ({ task }) => {
+  const [{ isDragging }, drag] = useDrag({
+    type: ItemTypes.CARD,
+    item: { type: ItemTypes.CARD },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
   //   console.log(task);
   const handleDelete = (id) => {
     console.log(id);
@@ -18,7 +29,11 @@ const ToDoCard = ({ task }) => {
       });
   };
   return (
-    <div className="rounded-md bg-cyan-600 bg-opacity-20  p-3 flex justify-between">
+    <div
+      className="rounded-md bg-cyan-600 bg-opacity-20  p-3 flex justify-between"
+      ref={drag}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
       <div>
         <h3 className="font-semibold">Title: {task?.title}</h3>
         <p>Detail: {task?.des}</p>

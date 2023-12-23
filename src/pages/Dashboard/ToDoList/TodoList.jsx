@@ -25,10 +25,12 @@ const TodoList = () => {
           ))}
         </div>
       </div>
+      {/* on going section */}
       <div className="border p-1 border-cyan-600">
         <h3 className="text-center mb-4 text-cyan-600 text-2xl">On Going</h3>
         <div className="flex flex-col gap-3"></div>
       </div>
+      {/* completed section */}
       <div className="border p-1 border-cyan-600">
         <h3 className="text-center mb-4 text-cyan-600 text-2xl">Completed</h3>
         <div className="flex flex-col gap-3"></div>
