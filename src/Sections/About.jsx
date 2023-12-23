@@ -1,7 +1,11 @@
 import about from "../assets/about.png";
 const About = () => {
   return (
-    <div className="mt-20 max-w-7xl mx-auto">
+    <div
+      className="mt-20 max-w-7xl mx-auto"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
       <div className="text-center font-semibold text-2xl">
         <h2 className="border-b text-cyan-600 pb-2 border-cyan-600 w-fit mx-auto">
           About Us
