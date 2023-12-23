@@ -1,7 +1,9 @@
 import { Button } from "flowbite-react";
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Banner = () => {
+  const { user } = useAuth();
   return (
     <div className="bg-banner-image bg-no-repeat bg-cover bg-center max-w-7xl mx-auto rounded-lg">
       <div className="max-w-screen-sm px-5 py-8 text-white bg-black bg-opacity-25 h-full">
@@ -16,9 +18,15 @@ const Banner = () => {
           optimize your workflow. Seamlessly manage tasks, set priorities,
           collaborate with your team, and achieve milestones effortlessly.
         </p>
-        <Link to={"/login"}>
-          <Button>Let's Explore</Button>
-        </Link>
+        {user ? (
+          <Link to={`/dashboard/home`}>
+            <Button>Let's Explore</Button>
+          </Link>
+        ) : (
+          <Link to={`/login`}>
+            <Button>Let's Explore</Button>
+          </Link>
+        )}
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const UpdateTask = () => {
   const [task, setTask] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/task/${params.id}`)
+      .get(`https://task-manager-six-gilt.vercel.app/task/${params.id}`)
       .then((res) => setTask(res.data));
   }, [params.id]);
   const {
@@ -26,7 +26,10 @@ const UpdateTask = () => {
     };
     console.log(task);
     axios
-      .put(`http://localhost:5000/task/update/${params.id}`, task)
+      .put(
+        `https://task-manager-six-gilt.vercel.app/task/update/${params.id}`,
+        task
+      )
       .then((res) => {
         if (res.data.acknowledged) {
           toast.success("Task Updated Successfully");

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 const Register = () => {
-  const { emailPassRegister, updateUserProfile } = useAuth();
+  const { emailPassRegister, updateUserProfile, logOut } = useAuth();
   const navigate = useNavigate();
   const {
     register,
@@ -37,6 +37,7 @@ const Register = () => {
           updateUserProfile(name, photo)
             .then(() => {
               toast.success("Registration Successful");
+              logOut();
               navigate("/login");
             })
             .catch((err) => {

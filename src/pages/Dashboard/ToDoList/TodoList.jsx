@@ -9,9 +9,11 @@ const TodoList = () => {
   console.log(tasks);
   //   console.log(tasks);
   useEffect(() => {
-    axios.get(`http://localhost:5000/task/user/${user?.email}`).then((res) => {
-      setTasks(res.data);
-    });
+    axios
+      .get(`https://task-manager-six-gilt.vercel.app/task/user/${user?.email}`)
+      .then((res) => {
+        setTasks(res.data);
+      });
   }, [user.email]);
   return (
     <div className="mt-20 p-4">

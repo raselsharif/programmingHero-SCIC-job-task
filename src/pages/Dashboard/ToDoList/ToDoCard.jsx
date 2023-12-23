@@ -7,16 +7,18 @@ const ToDoCard = ({ task }) => {
   //   console.log(task);
   const handleDelete = (id) => {
     console.log(id);
-    axios.delete(`http://localhost:5000/task/delete/${id}`).then((res) => {
-      console.log(res.data);
-      if (res.data.deletedCount > 0) {
-        toast.success("Deleted successfully");
-        location.reload();
-      }
-    });
+    axios
+      .delete(`https://task-manager-six-gilt.vercel.app/task/delete/${id}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.deletedCount > 0) {
+          toast.success("Deleted successfully");
+          location.reload();
+        }
+      });
   };
   return (
-    <div className="border border-cyan-600 p-3 flex justify-between">
+    <div className="rounded-md bg-cyan-600 bg-opacity-20  p-3 flex justify-between">
       <div>
         <h3 className="font-semibold">Title: {task?.title}</h3>
         <p>Detail: {task?.des}</p>

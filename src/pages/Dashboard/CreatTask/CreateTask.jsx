@@ -21,7 +21,7 @@ const CreateTask = () => {
     };
     console.log(task);
     axios
-      .post("http://localhost:5000/create-task", task)
+      .post("https://task-manager-six-gilt.vercel.app/create-task", task)
       .then((res) => {
         if (res.data.acknowledged) {
           toast.success("Task Created Successfully");
