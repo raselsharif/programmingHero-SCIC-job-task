@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import ToDoCard from "./ToDoCard";
 import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
 
 const TodoList = () => {
+  const { user } = useAuth();
   const [tasks, setTasks] = useState([]);
+  console.log(tasks);
   //   console.log(tasks);
   useEffect(() => {
-    axios.get("http://localhost:5000/tasks").then((res) => {
+    axios.get(`http://localhost:5000/task/user/${user?.email}`).then((res) => {
       setTasks(res.data);
     });
-  }, []);
+  }, [user.email]);
   return (
     <div className="mt-20 p-4">
       <div>
@@ -18,7 +21,6 @@ const TodoList = () => {
           {tasks?.map((task) => (
             <ToDoCard key={task._id} task={task} />
           ))}
-          <ToDoCard />
         </div>
       </div>
     </div>

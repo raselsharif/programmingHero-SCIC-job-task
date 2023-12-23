@@ -1,10 +1,18 @@
 import { Avatar, Dropdown, Navbar as Nav } from "flowbite-react";
 import logo from "../../../assets/logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { user } = useAuth;
+  const navigate = useNavigate();
+  const { logOut, user } = useAuth();
+  const handleLogOut = () => {
+    logOut().then(() => {
+      toast.success("Logged Out successfully");
+      navigate("/");
+    });
+  };
   return (
     <Nav
       fluid
@@ -23,25 +31,19 @@ const Navbar = () => {
           <Dropdown
             arrowIcon={false}
             inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
-            }
+            label={<Avatar alt="User settings" img={user?.photoURL} rounded />}
           >
             <Dropdown.Header>
-              <span className="block text-sm">Bonnie Green</span>
+              <span className="block text-sm">{user?.displayName}</span>
               <span className="block truncate text-sm font-medium">
-                name@flowbite.com
+                {user?.email}
               </span>
             </Dropdown.Header>
             <Link to={"/dashboard/home"}>
               <Dropdown.Item>Dashboard</Dropdown.Item>
             </Link>
             <Dropdown.Divider />
-            <Dropdown.Item>Sign out</Dropdown.Item>
+            <Dropdown.Item onClick={handleLogOut}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
           ""

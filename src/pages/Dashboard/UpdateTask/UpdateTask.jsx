@@ -2,46 +2,50 @@ import axios from "axios";
 import { Button, Label, Select, TextInput, Textarea } from "flowbite-react";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import useAuth from "../../../hooks/useAuth";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-const CreateTask = () => {
-  const { user } = useAuth();
-  console.log(user.email);
+const UpdateTask = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const [task, setTask] = useState({});
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/task/${params.id}`)
+      .then((res) => setTask(res.data));
+  }, [params.id]);
   const {
     register,
     formState: { errors },
     handleSubmit,
-    reset,
   } = useForm();
   const onSubmit = (data) => {
     const task = {
       ...data,
-      createDate: Date(),
-      email: user?.email,
     };
     console.log(task);
     axios
-      .post("http://localhost:5000/create-task", task)
+      .put(`http://localhost:5000/task/update/${params.id}`, task)
       .then((res) => {
         if (res.data.acknowledged) {
-          toast.success("Task Created Successfully");
-          reset();
+          toast.success("Task Updated Successfully");
+          navigate("/dashboard/todo-list");
         }
       })
       .then((err) => {
         if (err) {
-          toast.error("Task Not Created");
+          toast.error("Task Not Updated");
         }
       });
   };
   return (
     <div className="max-w-sm mx-auto mt-20">
-      <h2 className="text-center mb-4 text-2xl text-cyan-600">
-        Create New Task
-      </h2>
+      <h2 className="text-center mb-4 text-2xl text-cyan-600">Edit Task</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Label color="black" value="Task Title" />
         <TextInput
+          defaultValue={task?.title}
           className="my-3"
           placeholder="Task Title"
           {...register("title", { required: true })}
@@ -55,6 +59,7 @@ const CreateTask = () => {
           <div className="w-full">
             <Label color="black" value="Deadline" />
             <TextInput
+              defaultValue={task?.deadLine}
               type="date"
               className="my-3"
               {...register("deadLine", { required: true })}
@@ -70,6 +75,7 @@ const CreateTask = () => {
             <Select
               {...register("priority", { required: true })}
               className="my-3"
+              defaultValue={task?.priority}
             >
               <option>High</option>
               <option>Moderator</option>
@@ -85,6 +91,7 @@ const CreateTask = () => {
         </div>
         <Label color="black" value="Description" />
         <Textarea
+          defaultValue={task?.des}
           className="mt-3"
           placeholder="Task Details..."
           rows={8}
@@ -96,11 +103,11 @@ const CreateTask = () => {
           </p>
         )}
         <Button type="submit" className="mt-3">
-          Create
+          Update
         </Button>
       </form>
     </div>
   );
 };
 
-export default CreateTask;
+export default UpdateTask;

@@ -9,6 +9,8 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import DashboardHome from "../pages/Dashboard/DashboardHome/DashboardHome";
 import CreateTask from "../pages/Dashboard/CreatTask/CreateTask";
 import TodoList from "../pages/Dashboard/ToDoList/TodoList";
+import PrivateRoutes from "./PrivateRoure";
+import UpdateTask from "../pages/Dashboard/UpdateTask/UpdateTask";
 
 const routers = createBrowserRouter([
   {
@@ -39,20 +41,44 @@ const routers = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivateRoutes>
+        <Dashboard />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "/dashboard/home",
-        element: <DashboardHome />,
+        element: (
+          <PrivateRoutes>
+            <DashboardHome />
+          </PrivateRoutes>
+        ),
       },
 
       {
         path: "/dashboard/create-task",
-        element: <CreateTask />,
+        element: (
+          <PrivateRoutes>
+            <CreateTask />
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/dashboard/todo-list",
-        element: <TodoList />,
+        element: (
+          <PrivateRoutes>
+            <TodoList />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/dashboard/update/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateTask />
+          </PrivateRoutes>
+        ),
       },
     ],
   },
