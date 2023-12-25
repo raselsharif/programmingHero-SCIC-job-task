@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import GoogleLogin from "../compoments/common/GoogleLogin/GoogleLogin";
 const Login = () => {
   const navigate = useNavigate();
   const {
@@ -72,6 +73,7 @@ const Login = () => {
         <Button type="submit">Login</Button>
       </form>
       <div className="mt-4">
+        <GoogleLogin />
         <p>
           New here? Pls,
           <Link className="text-blue-900 hover:opacity-80" to={"/register"}>
